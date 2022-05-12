@@ -37,7 +37,7 @@ import USERLIST from '../_mock/user';
 //   { id: 'isVerified', label: 'Verified', alignRight: false },
 //   { id: 'status', label: 'Status', alignRight: false },
 //   { id: '' },
-// ];
+// ];//
 
 const TABLE_HEAD = [
   { id: 'nombre', label: 'Nombre', alignRight: false },
