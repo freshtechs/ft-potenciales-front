@@ -7,7 +7,6 @@ import {
   Card,
   Table,
   Stack,
-  Avatar,
   Button,
   Checkbox,
   TableRow,
@@ -20,22 +19,12 @@ import {
 } from '@mui/material';
 // components
 import Page from '../components/Page';
-import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
 
 // ----------------------------------------------------------------------
-
-// const TABLE_HEAD = [
-//   { id: 'name', label: 'Name', alignRight: false },
-//   { id: 'company', label: 'Company', alignRight: false },
-//   { id: 'role', label: 'Role', alignRight: false },
-//   { id: 'isVerified', label: 'Verified', alignRight: false },
-//   { id: 'status', label: 'Status', alignRight: false },
-//   { id: '' },
-// ];//
 
 const TABLE_HEAD = [
   { id: 'nombre', label: 'Nombre', alignRight: false },
@@ -98,25 +87,22 @@ export default function User() {
 
 
   useEffect(() => {
-    try {
-      const token2 = localStorage.getItem("token")
-      const loadClients = async () => {
-        setIsLoading(true);
+    const loadClients = async () => {
+      setIsLoading(true);
+      try {
         const response = await axios.get("http://localhost:5000/api/clients", {
           headers: {
             "Content-type": "application/json",
-            "x-access-token": token2
+            "x-access-token": localStorage.getItem("token")
           }
         });
         setClients(response.data);
         setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
       }
-      loadClients();
     }
-    catch (err) {
-      console.log(err.message)
-    }
-
+    loadClients();
   }, []);
 
   const handleRequestSort = (event, property) => {
@@ -175,7 +161,7 @@ export default function User() {
           <Typography variant="h4" gutterBottom>
             Lista de clientes
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button variant="contained" component={RouterLink} to="/dashboard/user/create" startIcon={<Iconify icon="eva:plus-fill" />}>
             Nuevo cliente
           </Button>
         </Stack>
@@ -244,7 +230,7 @@ export default function User() {
                   <TableBody>
                     <TableRow>
                       <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        Loading
+                        Loading...
                       </TableCell>
                     </TableRow>
                   </TableBody>
