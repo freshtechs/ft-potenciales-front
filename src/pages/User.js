@@ -17,12 +17,14 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material';
+import { CSVLink } from "react-csv";
 // components
 import Page from '../components/Page';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
+
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +38,17 @@ const TABLE_HEAD = [
   { id: 'esPotencial', label: 'Potencial', alignRight: false },
   { id: 'vendedor', label: 'Vendedor', alignRight: false }
 ]
+
+const csvHeaders = [
+  { key: 'nombre', label: 'Nombre' },
+  { key: 'apellido', label: 'Apellido' },
+  { key: 'email', label: 'Email' },
+  { key: 'telefono', label: 'Teléfono' },
+  { key: 'latitud', label: 'Latitud' },
+  { key: 'longitud', label: 'Longitud' },
+  { key: 'esPotencial', label: 'Potencial' },
+  { key: 'vendedor', label: 'Vendedor' }
+];
 
 // ----------------------------------------------------------------------
 
@@ -161,8 +174,18 @@ export default function User() {
           <Typography variant="h4" gutterBottom>
             Lista de clientes
           </Typography>
-          <Button variant="contained" component={RouterLink} to="/dashboard/user/create" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button variant="contained" component={RouterLink} to="/dashboard/client/create" startIcon={<Iconify icon="eva:plus-fill" />}>
             Nuevo cliente
+          </Button>
+          <Button variant="contained">
+            <CSVLink
+              data={clients}
+              headers={csvHeaders}
+              filename={"potenciales.csv"}
+            >
+              <Typography variant='button' color={'white'}>
+                EXPORTAR CSV</Typography>
+            </CSVLink>
           </Button>
         </Stack>
 
@@ -170,7 +193,7 @@ export default function User() {
           <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
           <Scrollbar>
-            <TableContainer sx={{ minWidth: 800 }}>
+            <TableContainer sx={{ minWidth: 800, maxWidth: 1500 }}>
               <Table>
                 <UserListHead
                   order={order}

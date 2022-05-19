@@ -1,3 +1,4 @@
+import './map.css'
 // routes
 import Router from './routes';
 // theme
