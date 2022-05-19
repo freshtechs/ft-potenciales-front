@@ -69,6 +69,8 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
 
     const [selecciono, SetSelecciono] = useState(false)
 
+    const [siTieneServicio, SetSiTieneServicio] = useState(false)
+
     const RegisterSchema = Yup.object().shape({
         nombre: Yup.string()
             .required('El nombre es obligatario')
@@ -127,7 +129,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
 
     const FormObserver = () => {
         const {
-            values: { tipoDeVivienda },
+            values: { tipoDeVivienda, yaTieneServicio },
             touched,
         } = useFormikContext();
         useEffect(() => {
@@ -135,13 +137,18 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                 case 'edificio':
                     SetSelecciono(true)
                     break;
-                    case 'villa':
+                case 'villa':
                     SetSelecciono(true)
                     break;
                 default:
                     break;
             }
-        }, [tipoDeVivienda, touched.tipoDeVivienda,]);
+            if (yaTieneServicio) {
+                SetSiTieneServicio(true)
+            } else {
+                SetSiTieneServicio(false)
+            }
+        }, [tipoDeVivienda, touched.tipoDeVivienda, yaTieneServicio, touched.yaTieneServicio]);
         return null;
     }
 
@@ -250,77 +257,84 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                         <FormHelperText>{touched.yaTieneServicio && errors.yaTieneServicio}</FormHelperText>
                     </FormControl>
 
-                    {/* pregunta 2 */}
-                    <FormControl sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel id="demo-simple-select-helper-label">
-                            <Typography>{questions[1].question}</Typography>
-                        </InputLabel>
-                        <Select
-                            labelId="demo-simple-select-helper-label"
-                            id="demo-simple-select-helper"
-                            value={calificacion}
-                            label={<Typography>{questions[1].question}</Typography>}
-                            {...getFieldProps('calificacion')}
-                            error={Boolean(touched.calificacion && errors.calificacion)}
-                        >
-                            {questions[1].choices.map((choice, index) => {
-                                const key = index
-                                return (
-                                    <MenuItem key={key} value={choice}>{choice}</MenuItem>
-                                )
+                    {siTieneServicio && (
+                        <Stack direction={{ sm: 'column' }} spacing={2}>
+                            {/* pregunta 2 */}
+                            < FormControl sx={{ minWidth: 120 }}>
+                                <InputLabel id="demo-simple-select-helper-label">
+                                    <Typography>{questions[1].question}</Typography>
+                                </InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-helper-label"
+                                    id="demo-simple-select-helper"
+                                    value={calificacion}
+                                    label={<Typography>{questions[1].question}</Typography>}
+                                    {...getFieldProps('calificacion')}
+                                    error={Boolean(touched.calificacion && errors.calificacion)}
+                                >
+                                    {questions[1].choices.map((choice, index) => {
+                                        const key = index
+                                        return (
+                                            <MenuItem key={key} value={choice}>{choice}</MenuItem>
+                                        )
 
-                            })}
-                        </Select>
-                        <FormHelperText>{touched.calificacion && errors.calificacion}</FormHelperText>
-                    </FormControl>
+                                    })}
+                                </Select>
+                                <FormHelperText>{touched.calificacion && errors.calificacion}</FormHelperText>
+                            </FormControl>
 
-                    {/* pregunta 3 */}
-                    <FormControl sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel id="demo-simple-select-helper-label">
-                            <Typography>{questions[2].question}</Typography>
-                        </InputLabel>
-                        <Select
-                            labelId="demo-simple-select-helper-label"
-                            id="demo-simple-select-helper"
-                            value={calificacionCalidadPrecio}
-                            label={<Typography>{questions[2].question}</Typography>}
-                            {...getFieldProps('calificacionCalidadPrecio')}
-                            error={Boolean(touched.calificacionCalidadPrecio && errors.calificacionCalidadPrecio)}
-                        >
-                            {questions[2].choices.map((choice, index) => {
-                                const key = index
-                                return (
-                                    <MenuItem key={key} value={choice}>{choice}</MenuItem>
-                                )
+                            {/* pregunta 3 */}
+                            <FormControl sx={{ m: 1, minWidth: 120 }}>
+                                <InputLabel id="demo-simple-select-helper-label">
+                                    <Typography>{questions[2].question}</Typography>
+                                </InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-helper-label"
+                                    id="demo-simple-select-helper"
+                                    value={calificacionCalidadPrecio}
+                                    label={<Typography>{questions[2].question}</Typography>}
+                                    {...getFieldProps('calificacionCalidadPrecio')}
+                                    error={Boolean(touched.calificacionCalidadPrecio && errors.calificacionCalidadPrecio)}
+                                >
+                                    {questions[2].choices.map((choice, index) => {
+                                        const key = index
+                                        return (
+                                            <MenuItem key={key} value={choice}>{choice}</MenuItem>
+                                        )
 
-                            })}
-                        </Select>
-                        <FormHelperText>{touched.calificacionCalidadPrecio && errors.calificacionCalidadPrecio}</FormHelperText>
-                    </FormControl>
+                                    })}
+                                </Select>
+                                <FormHelperText>{touched.calificacionCalidadPrecio && errors.calificacionCalidadPrecio}</FormHelperText>
+                            </FormControl>
 
-                    {/* pregunta 4 */}
-                    <FormControl sx={{ m: 1, minWidth: 120 }}>
-                        <InputLabel id="demo-simple-select-helper-label">
-                            <Typography>{questions[3].question}</Typography>
-                        </InputLabel>
-                        <Select
-                            labelId="demo-simple-select-helper-label"
-                            id="demo-simple-select-helper"
-                            value={loRemplazaria}
-                            label={<Typography>{questions[3].question}</Typography>}
-                            {...getFieldProps('loRemplazaria')}
-                            error={Boolean(touched.loRemplazaria && errors.loRemplazaria)}
-                        >
-                            {theSameChoices.map((choice, index) => {
-                                const key = index
-                                return (
-                                    <MenuItem key={key} value={choice}>{choice}</MenuItem>
-                                )
+                            {/* pregunta 4 */}
+                            <FormControl sx={{ m: 1, minWidth: 120 }}>
+                                <InputLabel id="demo-simple-select-helper-label">
+                                    <Typography>{questions[3].question}</Typography>
+                                </InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-helper-label"
+                                    id="demo-simple-select-helper"
+                                    value={loRemplazaria}
+                                    label={<Typography>{questions[3].question}</Typography>}
+                                    {...getFieldProps('loRemplazaria')}
+                                    error={Boolean(touched.loRemplazaria && errors.loRemplazaria)}
+                                >
+                                    {theSameChoices.map((choice, index) => {
+                                        const key = index
+                                        return (
+                                            <MenuItem key={key} value={choice}>{choice}</MenuItem>
+                                        )
 
-                            })}
-                        </Select>
-                        <FormHelperText>{touched.loRemplazaria && errors.loRemplazaria}</FormHelperText>
-                    </FormControl>
+                                    })}
+                                </Select>
+                                <FormHelperText>{touched.loRemplazaria && errors.loRemplazaria}</FormHelperText>
+                            </FormControl>
+                        </Stack>
+                    )
+
+                    }
+
 
                     {/* pregunta 5 */}
                     <FormControl sx={{ m: 1, minWidth: 120 }}>

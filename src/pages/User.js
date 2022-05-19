@@ -35,6 +35,17 @@ const TABLE_HEAD = [
   { id: 'telefono', label: 'Teléfono', alignRight: false },
   { id: 'latitud', label: 'Latitud', alignRight: false },
   { id: 'longitud', label: 'Longitud', alignRight: false },
+  { id: 'tipoDeVivienda', label: 'Tipo de Vivienda', alignRight: false },
+  { id: 'nombreDeVivienda', label: 'Nombre de Vivienda', alignRight: false },
+  { id: 'numeroDeVivienda', label: '# de vivienda', alignRight: false },
+  { id: 'yaTieneServicio', label: 'Tiene Servicio', alignRight: false },
+  { id: 'calificacion', label: 'Calidad', alignRight: false },
+  { id: 'calificacionCalidadPrecio', label: 'Calidad-Precio', alignRight: false },
+  { id: 'loRemplazaria', label: 'Remplazaria', alignRight: false },
+  { id: 'loAdquiriria', label: 'Adquiriria', alignRight: false },
+  { id: 'loRecomendaria', label: 'Recomendaria', alignRight: false },
+  { id: 'rangoMinimoDePago', label: 'Rango Minmo', alignRight: false },
+  { id: 'rangoMaximoDePago', label: 'Rango Maximo', alignRight: false },
   { id: 'esPotencial', label: 'Potencial', alignRight: false },
   { id: 'vendedor', label: 'Vendedor', alignRight: false }
 ]
@@ -46,6 +57,17 @@ const csvHeaders = [
   { key: 'telefono', label: 'Teléfono' },
   { key: 'latitud', label: 'Latitud' },
   { key: 'longitud', label: 'Longitud' },
+  { key: 'tipoDeVivienda', label: 'Tipo de Vivienda' },
+  { key: 'nombreDeVivienda', label: 'Nombre de Vivienda' },
+  { key: 'numeroDeVivienda', label: '# de vivienda' },
+  { key: 'yaTieneServicio', label: 'Tiene Servicio' },
+  { key: 'calificacion', label: 'Calidad' },
+  { key: 'calificacionCalidadPrecio', label: 'Calidad-Precio' },
+  { key: 'loRemplazaria', label: 'Remplazaria' },
+  { key: 'loAdquiriria', label: 'Adquiriria' },
+  { key: 'loRecomendaria', label: 'Recomendaria' },
+  { key: 'rangoMinimoDePago', label: 'Rango Minmo' },
+  { key: 'rangoMaximoDePago', label: 'Rango Maximo' },
   { key: 'esPotencial', label: 'Potencial' },
   { key: 'vendedor', label: 'Vendedor' }
 ];
@@ -206,7 +228,11 @@ export default function User() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { _id, nombre, apellido, email, telefono, latitud, longitud, esPotencial, vendedor } = row;
+                    const { _id, nombre, apellido, email, telefono, latitud, longitud,
+                      tipoDeVivienda, nombreDeVivienda, numeroDeVivienda,
+                      yaTieneServicio, calificacion, calificacionCalidadPrecio, loRemplazaria,
+                      loAdquiriria, loRecomendaria,
+                      rangoMinimoDePago, rangoMaximoDePago, esPotencial, vendedor, } = row;
                     const isItemSelected = selected.indexOf(nombre) !== -1;
 
                     return (
@@ -234,6 +260,20 @@ export default function User() {
                         <TableCell align="left">{telefono}</TableCell>
                         <TableCell align="left">{latitud}</TableCell>
                         <TableCell align="left">{longitud}</TableCell>
+
+                        <TableCell align="left">{tipoDeVivienda}</TableCell>
+                        <TableCell align="left">{nombreDeVivienda}</TableCell>
+                        <TableCell align="left">{numeroDeVivienda}</TableCell>
+
+                        <TableCell align="left">{yaTieneServicio ? 'Si' : 'No'}</TableCell>
+                        <TableCell align="left">{calificacion}</TableCell>
+                        <TableCell align="left">{calificacionCalidadPrecio}</TableCell>
+                        <TableCell align="left">{loRemplazaria}</TableCell>
+                        <TableCell align="left">{loAdquiriria}</TableCell>
+                        <TableCell align="left">{loRecomendaria}</TableCell>
+
+                        <TableCell align="left">{rangoMinimoDePago}</TableCell>
+                        <TableCell align="left">{rangoMaximoDePago}</TableCell>
                         <TableCell align="left">{esPotencial ? 'Si' : 'No'}</TableCell>
                         <TableCell align="left">{vendedor}</TableCell>
                         <TableCell align="right">
