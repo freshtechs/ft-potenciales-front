@@ -103,7 +103,7 @@ export default function User() {
     const loadClients = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get("http://localhost:5000/api/clients", {
+        const response = await axios.get("https://potenciales.herokuapp.com/api/clients", {
           headers: {
             "Content-type": "application/json",
             "x-access-token": localStorage.getItem("token")

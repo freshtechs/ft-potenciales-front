@@ -48,7 +48,7 @@ export default function LoginForm() {
       password: values.password,
     }
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/login", body, { withCredentials: true });
+      const response = await axios.post("https://potenciales.herokuapp.com/api/auth/login", body, { withCredentials: true });
       localStorage.setItem("token", response.data.token)
       localStorage.setItem("vendedor", values.email.toLowerCase())
       navigate('/dashboard/user', { replace: true })

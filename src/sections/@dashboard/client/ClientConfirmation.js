@@ -33,7 +33,7 @@ const ClientConfirmation = ({ prevStep, values, startOver }) => {
             vendedor: localStorage.getItem("vendedor")
         }
         try {
-            const response = await axios.post("http://localhost:5000/api/clients", client, {
+            const response = await axios.post("https://potenciales.herokuapp.com/api/clients", client, {
                 withCredentials: true,
                 headers: {
                     "Content-type": "application/json",

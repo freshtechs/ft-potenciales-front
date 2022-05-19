@@ -65,7 +65,7 @@ export default function RegisterForm() {
       esAdmin: false
     }
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/register", user, {
+      const response = await axios.post("https://potenciales.herokuapp.com/api/auth/register", user, {
         withCredentials: true
       });
       if (response.data.token) {
