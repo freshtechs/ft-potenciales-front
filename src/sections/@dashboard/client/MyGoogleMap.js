@@ -101,7 +101,7 @@ class MyGoogleMap extends Component {
 
         return (
             <div>
-                <Typography variant='subtitle1' > Ubique el marcador rojo en la posición exacta del cliente </Typography>
+                <Typography variant='subtitle1' > Toque en mapa la posición exacta del cliente </Typography>
                 <div className='main-wrapper'>
                     {mapApiLoaded}
                     <GoogleMapReact
@@ -117,7 +117,6 @@ class MyGoogleMap extends Component {
                         onChildClick={() => console.log('child click')}
                         onClick={this._onClick}
                         bootstrapURLKeys={{
-                            v: 3.30,
                             key: 'AIzaSyCc-DG9F1KmffrlHzLqqOwV3Rmaav5IITg',
                             libraries: ['places', 'geometry'],
                         }}
