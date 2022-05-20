@@ -1,4 +1,3 @@
-require("dotenv").config()
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GoogleMapReact from 'google-map-react';
@@ -118,7 +117,7 @@ class MyGoogleMap extends Component {
                         onChildClick={() => console.log('child click')}
                         onClick={this._onClick}
                         bootstrapURLKeys={{
-                            key: process.env.GMAP_APIKEY,
+                            key: process.env.REACT_APP_GMAP_APIKEY,
                             libraries: ['places', 'geometry'],
                         }}
                         yesIWantToUseGoogleMapApiInternals
