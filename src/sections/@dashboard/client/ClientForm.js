@@ -132,7 +132,6 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
         useEffect(() => {
             switch (yaTieneServicio.trim()) {
                 case 'true':
-                    console.log(yaTieneServicio)
                     SetSiTieneServicio(true)
                     break
                 case 'false':
@@ -144,29 +143,21 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
         }, [yaTieneServicio, touched.yaTieneServicio]);
 
         useEffect(() => {
-            if (touched.tipoDeVivienda && tipoDeVivienda.trim() !== '') {
-                switch (tipoDeVivienda) {
-                    case 'edificio':
-                        SetSelecciono(true)
-                        break;
-                    case 'villa':
-                        SetSelecciono(true)
-                        break;
-                    default:
-                        break;
-                }
+            switch (tipoDeVivienda.trim()) {
+                case 'casa':
+                    SetSelecciono(false)
+                    break;
+                case 'edificio':
+                    SetSelecciono(true)
+                    break;
+                case 'villa':
+                    SetSelecciono(true)
+                    break;
+                default:
+                    break;
             }
-
         }, [tipoDeVivienda, touched.tipoDeVivienda,]);
 
-        useEffect(() => {
-            if (yaTieneServicio.trim() === 'true' && touched.yaTieneServicio) {
-                console.log(yaTieneServicio)
-                SetSiTieneServicio(true)
-            } else if (yaTieneServicio.trim() === 'false' && touched.yaTieneServicio) {
-                SetSiTieneServicio(false)
-            }
-        }, [touched.yaTieneServicio, yaTieneServicio]);
         return null;
     }
 
