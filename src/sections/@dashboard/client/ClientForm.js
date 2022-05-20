@@ -177,7 +177,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
     return (
         <FormikProvider value={formik}>
             <Form autoComplete="off" noValidate>
-                <Stack spacing={3}>
+                <Stack spacing={3} direction={"column"}>
                     <Typography variant='subtitle1' > Ingrese los detalles del cliente </Typography>
                     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                         <TextField
@@ -266,6 +266,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                             labelId="demo-simple-select-helper-label"
                             id="demo-simple-select-helper"
                             value={yaTieneServicio}
+                            autoWidth
                             label={questions[0].question}
                             {...getFieldProps('yaTieneServicio')}
                             error={Boolean(touched.yaTieneServicio && errors.yaTieneServicio)}
@@ -277,7 +278,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                     </FormControl>
 
                     {siTieneServicio && (
-                        <Stack direction={{ sm: 'column' }} spacing={2}>
+                        <Stack direction={"column"} spacing={2}>
                             {/* pregunta 2 */}
                             < FormControl sx={{ minWidth: 120 }}>
                                 <InputLabel id="demo-simple-select-helper-label">
@@ -287,6 +288,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                                     labelId="demo-simple-select-helper-label"
                                     id="demo-simple-select-helper"
                                     value={calificacion}
+                                    autoWidth
                                     label={<Typography>{questions[1].question}</Typography>}
                                     {...getFieldProps('calificacion')}
                                     error={Boolean(touched.calificacion && errors.calificacion)}
@@ -311,6 +313,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                                     labelId="demo-simple-select-helper-label"
                                     id="demo-simple-select-helper"
                                     value={calificacionCalidadPrecio}
+                                    autoWidth
                                     label={<Typography>{questions[2].question}</Typography>}
                                     {...getFieldProps('calificacionCalidadPrecio')}
                                     error={Boolean(touched.calificacionCalidadPrecio && errors.calificacionCalidadPrecio)}
@@ -335,6 +338,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                                     labelId="demo-simple-select-helper-label"
                                     id="demo-simple-select-helper"
                                     value={loRemplazaria}
+                                    autoWidth
                                     label={<Typography>{questions[3].question}</Typography>}
                                     {...getFieldProps('loRemplazaria')}
                                     error={Boolean(touched.loRemplazaria && errors.loRemplazaria)}
@@ -364,6 +368,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                             labelId="demo-simple-select-helper-label"
                             id="demo-simple-select-helper"
                             value={loAdquiriria}
+                            autoWidth
                             label={<Typography>{questions[4].question}</Typography>}
                             {...getFieldProps('loAdquiriria')}
                             error={Boolean(touched.loAdquiriria && errors.loAdquiriria)}
@@ -388,6 +393,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                             labelId="demo-simple-select-helper-label"
                             id="demo-simple-select-helper"
                             value={loRecomendaria}
+                            autoWidth
                             label={<Typography>{questions[3].question}</Typography>}
                             {...getFieldProps('loRecomendaria')}
                             error={Boolean(touched.loRecomendaria && errors.loRecomendaria)}
