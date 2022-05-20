@@ -1,13 +1,12 @@
 import * as Yup from 'yup';
 import { Form, FormikProvider, useFormik, useFormikContext } from 'formik';
 // material
-import { Stack, TextField, Typography } from '@mui/material';
+import { Button, Stack, TextField, Typography } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { LoadingButton } from '@mui/lab';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
@@ -142,7 +141,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                 default:
                     break
             }
-        }, [yaTieneServicio, touched.yaTieneServicio,]);
+        }, [yaTieneServicio, touched.yaTieneServicio]);
 
         useEffect(() => {
             if (touched.tipoDeVivienda && tipoDeVivienda.trim() !== '') {
@@ -412,7 +411,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                     {/* </Stack> */}
 
                     <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                        <LoadingButton
+                        <Button
                             onClick={handleSubmit}
                             fullWidth
                             size="large"
@@ -420,7 +419,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                             variant="contained"
                             loading={isSubmitting}>
                             <Typography variant='button'>SIGUIENTE</Typography>
-                        </LoadingButton>
+                        </Button>
                     </Stack>
                 </Stack>
                 <FormObserver />
