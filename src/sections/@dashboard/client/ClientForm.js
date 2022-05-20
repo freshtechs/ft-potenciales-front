@@ -129,23 +129,45 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
             values: { tipoDeVivienda, yaTieneServicio },
             touched,
         } = useFormikContext();
+
         useEffect(() => {
-            switch (tipoDeVivienda) {
-                case 'edificio':
-                    SetSelecciono(true)
-                    break;
-                case 'villa':
-                    SetSelecciono(true)
-                    break;
+            switch (yaTieneServicio.trim()) {
+                case 'true':
+                    console.log(yaTieneServicio)
+                    SetSiTieneServicio(true)
+                    break
+                case 'false':
+                    SetSiTieneServicio(false)
+                    break
                 default:
-                    break;
+                    break
             }
-            if (yaTieneServicio) {
+        }, [yaTieneServicio, touched.yaTieneServicio,]);
+
+        useEffect(() => {
+            if (touched.tipoDeVivienda && tipoDeVivienda.trim() !== '') {
+                switch (tipoDeVivienda) {
+                    case 'edificio':
+                        SetSelecciono(true)
+                        break;
+                    case 'villa':
+                        SetSelecciono(true)
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        }, [tipoDeVivienda, touched.tipoDeVivienda,]);
+
+        useEffect(() => {
+            if (yaTieneServicio.trim() === 'true' && touched.yaTieneServicio) {
+                console.log(yaTieneServicio)
                 SetSiTieneServicio(true)
-            } else {
+            } else if (yaTieneServicio.trim() === 'false' && touched.yaTieneServicio) {
                 SetSiTieneServicio(false)
             }
-        }, [tipoDeVivienda, touched.tipoDeVivienda, yaTieneServicio, touched.yaTieneServicio]);
+        }, [touched.yaTieneServicio, yaTieneServicio]);
         return null;
     }
 
