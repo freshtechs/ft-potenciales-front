@@ -86,18 +86,30 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
             .matches('^(0414|0424|0412|0416|0426)[0-9]{7}$', 'El número de teléfono debe ser en formato 04146221214'),
         tipoDeVivienda: Yup.string()
             .required('El tipo de vivienda es obligatario'),
-        nombreDeVivienda: Yup.string()
-            .required('El nombre o número de vivienda es obligatario'),
+        nombreDeVivienda: Yup.string().when("tipoDeVivienda", {
+            is: (val) => val !== "casa",
+            then: Yup.string().required('El nombre de vivienda es obligatario'),
+            otherwise: Yup.string().notRequired()
+        }),
         numeroDeVivienda: Yup.string()
-            .required('El nombre o número de vivienda es obligatario'),
+            .required('El número de vivienda es obligatario'),
         yaTieneServicio: Yup.string()
             .required('Campo obligatario'),
-        calificacion: Yup.string()
-            .required('Campo obligatario'),
-        calificacionCalidadPrecio: Yup.string()
-            .required('Campo obligatario'),
-        loRemplazaria: Yup.string()
-            .required('Campo obligatario'),
+        calificacion: Yup.string().when("yaTieneServicio", {
+            is: (val) => val === "true",
+            then: Yup.string().required('Campo obligatario'),
+            otherwise: Yup.string().notRequired()
+        }),
+        calificacionCalidadPrecio: Yup.string().when("yaTieneServicio", {
+            is: (val) => val === "true",
+            then: Yup.string().required('Campo obligatario'),
+            otherwise: Yup.string().notRequired()
+        }),
+        loRemplazaria: Yup.string().when("yaTieneServicio", {
+            is: (val) => val === "true",
+            then: Yup.string().required('Campo obligatario'),
+            otherwise: Yup.string().notRequired()
+        }),
         loAdquiriria: Yup.string()
             .required('Campo obligatario'),
         loRecomendaria: Yup.string()
@@ -120,6 +132,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
         onSubmit: () => {
             handleChange(values)
             nextStep();
+            console.log('si?')
         },
     });
 
@@ -162,7 +175,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
     }
 
 
-    const { errors, touched, values, handleSubmit, isSubmitting, getFieldProps } = formik;
+    const { errors, touched, values, handleSubmit, getFieldProps } = formik;
 
     return (
         <FormikProvider value={formik}>
@@ -407,8 +420,7 @@ function ClientForm({ nextStep, handleChange, inputValues }) {
                             fullWidth
                             size="large"
                             type="submit"
-                            variant="contained"
-                            loading={isSubmitting}>
+                            variant="contained">
                             <Typography variant='button'>SIGUIENTE</Typography>
                         </Button>
                     </Stack>
